@@ -1,23 +1,46 @@
-export const accessoryOptions = [
-  "blank",
-  "eyepatch",
-  "kurt",
-  "prescription01",
-  "prescription02",
-  "round",
-  "sunglasses",
-  "wayfarers",
-];
-export const backgroundColorOptions = {
-  blank: "Blanco",
-  b6e3f4: "Azul",
-  c0aede: "Morado",
-  d1d4f9: "Lavanda",
+const accessoryOptions = {
+  "blank": "Sin Accesorio",
+  "eyepatch" : "Parche Pirata",
+  "kurt" : "Gafas de MaryPili",
+  "prescription01" : "Gafas de vista 1",
+  "prescription02" : "Gafas de vista 2",
+  "round" : "Gafas de Harry Potter",
+  "sunglasses" : "Gafas de sol 1",
+  "wayfarers" : "Gafas de sol 2"
+};
+const backgroundColorOptions = {
+  "65c9ff" : "Sin fondo",
+  "b6e3f4": "Azul",
+  "c0aede": "Morado",
+  "d1d4f9": "Lavanda",
+  "ffd5dc": "Rosa",
+  "ffdfbf": "Melocotón"
 };
 
-export const backgroundTypeOptions = ["gradientLinear", "solid"];
+const backgroundTypeOptions = [
+  "gradientLinear",
+   "solid"
+  ];
 
-export const accessoriesColorOptions = {
+const accessoriesColorOptions = {
+  "262e33": "Gris oscuro",
+  "65c9ff": "Celeste",
+  "5199e4": "Azul claro",
+  "25557c": "Azul marino",
+  e6e6e6: "Gris claro",
+  "929598": "Gris",
+  "3c4f5c": "Gris azulado",
+  b1e2ff: "Azul pálido",
+  a7ffc4: "Verde pálido",
+  ffdeb5: "Melocotón",
+  ffafb9: "Rosa pálido",
+  ffffb1: "Blanco amarillento",
+  ff488e: "Rosa intenso",
+  ff5c5c: "Rojo intenso",
+  ffffff: "Blanco",
+};
+
+const clothesColorOptions = {
   "262e33": "Gris oscuro",
   "65c9ff": "Celeste",
   "5199e4": "Azul claro",
@@ -35,89 +58,74 @@ export const accessoriesColorOptions = {
   ffffff: "Blanco",
 };
 
-export const clothesColorOptions = {
-  "262e33": "Gris oscuro",
-  "65c9ff": "Celeste",
-  "5199e4": "Azul claro",
-  "25557c": "Azul marino",
-  e6e6e6: "Gris claro",
-  929598: "Gris",
-  "3c4f5c": "Gris azulado",
-  b1e2ff: "Azul pálido",
-  a7ffc4: "Verde pálido",
-  ffdeb5: "Melocotón",
-  ffafb9: "Rosa pálido",
-  ffffb1: "Blanco amarillento",
-  ff488e: "Rosa intenso",
-  ff5c5c: "Rojo intenso",
-  ffffff: "Blanco",
+const clothesOptions = {
+  "blank" : "Sin Ropa",
+  "blazerAndShirt" : "Blazer y camsieta",
+  "blazerAndSweater" : "Blazer y Jersey",
+  "collarAndSweater"  : "Jersey de cuello",
+  "graphicShirt" : "Camiseta con gráfico",
+  "hoodie" : "Sudadera",
+  "overall" : "Peto",
+  "shirtCrewNeck" : "Camiseta cuello normal",
+  "shirtScoopNeck": "Camiseta cuello grande",
+  "shirtVNeck" : "Camiseta cuello en pico",
 };
 
-export const clothesOptions = [
-  "blazerAndShirt",
-  "blazerAndSweater",
-  "collarAndSweater",
-  "graphicShirt",
-  "hoodie",
-  "overall",
-  "shirtCrewNeck",
-  "shirtScoopNeck",
-  "shirtVNeck",
-];
+const clothesGraphicOptions = {
+  "bat" : "Murciélago",
+  "bear" : "Oso",
+  "cumbia" : "Cumbia",
+  "deer" : "Reno",
+  "diamond" : "Diamante",
+  "hola" : "Hola",
+  "pizza" : "Pizza",
+  "resist" : "Resistir",
+  "skull" : "Calavera",
+  "skullOutline" : "Calavera 2",
+};
 
-export const clothesGraphicOptions = [
-  "bat",
-  "bear",
-  "cumbia",
-  "deer",
-  "diamond",
-  "hola",
-  "pizza",
-  "resist",
-  "skull",
-  "skullOutline",
-];
+const eyebrowsOptions = {
+  "blank": "Sin cejas",
+  "default" : "Basicas",
+  "angryNatural" : "Naturales enfadado/a",
+  "defaultNatural" : "Naturales",
+  "flatNatural" : "Naturales neutras",
+  "frownNatural" : "Naturales preocupado/a",
+  "raisedExcitedNatural" : "Naturales animado/a",
+  "sadConcernedNatural" : "Naturales triste",
+  "unibrowNatural" : "Unicejo",
+  "upDownNatural" : "Naturales dubitativo/a",
+  "angry" : "Enfadado/a",
+  "raisedExcited" : "Animado/a",
+  "sadConcerned" : "Triste",
+  "upDown" : "Dubitativo/a",
+};
 
-export const eyebrowsOptions = [
-  "angryNatural",
-  "defaultNatural",
-  "flatNatural",
-  "frownNatural",
-  "raisedExcitedNatural",
-  "sadConcernedNatural",
-  "unibrowNatural",
-  "upDownNatural",
-  "angry",
-  "default",
-  "raisedExcited",
-  "sadConcerned",
-  "upDown",
-];
+const eyesOptions = {
+  "default" : "Basicos",
+  "closed" : "Cerrados",
+  "cry" : "Llorando",
+  "eyeRoll" : "Mirando arriba",
+  "happy" : "Feliz",
+  "hearts" : "Enamorado/a",
+  "side" : "Sospechando",
+  "squint" : "Mirada perdida",
+  "surprised" : "Sorprendido",
+  "winkWacky" : "Guiño 1",
+  "wink" : "Guiño 2",
+  "xDizzy" : "Muerto",
+};
 
-export const eyesOptions = [
-  "closed",
-  "cry",
-  "default",
-  "eyeRoll",
-  "happy",
-  "hearts",
-  "side",
-  "squint",
-  "surprised",
-  "winkWacky",
-  "wink",
-  "xDizzy",
-];
+const facialHairOptions = {
+  "blank" : "Sin barba",
+  "beardLight" : "Barba corta",
+  "beardMajestic" : "Barba larga",
+  "beardMedium" : "Barba media",
+  "moustacheFancy" : "Bigote hipster",
+  "moustacheMagnum" : "Bigote poblado",
+};
 
-export const facialHairOptions = [
-  "beardLight",
-  "beardMajestic",
-  "beardMedium",
-  "moustacheFancy",
-  "moustacheMagnum",
-];
-
-export const facialHairColorOptions = {
+const facialHairColorOptions = {
   a55728: "Castaño oscuro",
   "2c1b18": "Marrón oscuro",
   b58143: "Rubio claro",
@@ -130,10 +138,10 @@ export const facialHairColorOptions = {
   e8e1e1: "Blanco",
 };
 
-export const hairColorOptions = {
+const hairColorOptions = {
   a55728: "Castaño oscuro",
-  "2c1b18": "Marrón oscuro",
-  b58143: "Rubio claro",
+  "2c1b18": "Negro",
+  b58143: "Rubio oscuro",
   d6b370: "Rubio",
   724133: "Marrón",
   "4a312c": "Marrón oscuro",
@@ -143,7 +151,7 @@ export const hairColorOptions = {
   e8e1e1: "Blanco",
 };
 
-export const hatColorOptions = {
+const hatColorOptions = {
   "262e33": "Gris oscuro",
   "65c9ff": "Celeste",
   "5199e4": "Azul claro",
@@ -161,22 +169,22 @@ export const hatColorOptions = {
   ffffff: "Blanco",
 };
 
-export const mouthOptions = [
-  "concerned",
-  "default",
-  "disbelief",
-  "eating",
-  "grimace",
-  "sad",
-  "screamOpen",
-  "serious",
-  "smile",
-  "tongue",
-  "twinkle",
-  "vomit",
-];
+const mouthOptions = {
+  "default" : "Básica",
+  "concerned" : "Preocupado/a",
+  "disbelief" : "Incredulo/a",
+  "eating" : "Comiendo",
+  "grimace" : "Mueca",
+  "sad" : "Triste",
+  "screamOpen" : "Gritando",
+  "serious" : "Serio",
+  "smile" : "Sonriente",
+  "tongue" : "Sacando la lengua",
+  "twinkle" : "Contento",
+  "vomit" : "Vomitando",
+};
 
-export const skinColorOptions = {
+const skinColorOptions = {
   614335: "Moreno oscuro",
   d08b5b: "Bronceado",
   ae5d29: "Moreno",
@@ -186,41 +194,49 @@ export const skinColorOptions = {
   f8d25c: "Piel clara",
 };
 
-export const topOptions = [
-  "hat",
-  "hijab",
-  "turban",
-  "winterHat1",
-  "winterHat02",
-  "winterHat03",
-  "winterHat04",
-  "bob",
-  "bun",
-  "curly",
-  "curvy",
-  "dreads",
-  "frida",
-  "fro",
-  "froBand",
-  "longButNotTooLong",
-  "miaWallace",
-  "shavedSides",
-  "straight02",
-  "straight01",
-  "straightAndStrand",
-  "dreads01",
-  "dreads02",
-  "frizzle",
-  "shaggy",
-  "shaggyMullet",
-  "shortCurly",
-  "shortFlat",
-  "shortRound",
-  "shortWaved",
-  "sides",
-  "theCaesar",
-  "theCaesarAndSidePart",
-  "bigHair",
-];
+const topOptions = {
+  "blank": "Calvo",
+  "hat" : "Sombrero",
+  "hijab" : "Hijab",
+  "turban" : "Turbante",
+  "winterHat1" : "Sombrero de invierno 1",
+  "winterHat02" : "Sombrero de invierno 2",
+  "winterHat03" : "Sombrero de invierno 3",
+  "winterHat04" : "Sombrero de invierno 4",
+  "bob" : "Pelo de madre",
+  "bun" : "Mochete",
+  "curly" : "Rizado",
+  "curvy" : "Ondulado",
+  "dreads" : "Rastas",
+  "frida" : "Hippie",
+  "fro"  : "Afro",
+  "froBand" : "Afro con banda",
+  "longButNotTooLong" : "Media melena",
+  "miaWallace" : "Media melena con flequillo",
+  "shavedSides"  : "Rockstar",
+  "straight02" : "Pelo liso",
+  "straight01" : "Pelo liso con volumen",
+  "straightAndStrand" : "Pelo largo con flequillo",
+  "dreads01" : "Pelo pincho",
+  "dreads02" : "Despeinado",
+  "frizzle" : "Tupé rapado",
+  "shaggy" : "Desenfadado",
+  "shaggyMullet" : "Desenfadado con melena",
+  "shortCurly" : "Rizado corto",
+  "shortFlat" : "Pelo corto peinado",
+  "shortRound" : "Pelo corto",
+  "shortWaved" : "Tupé",
+  "sides" : "Medio Calvo",
+  "theCaesar" : "Rapado",
+  "theCaesarAndSidePart" : "Rapado con toque",
+  "bigHair": "Largo ondulado",
+};
 
-export const styleOptions = ["default", "circle"];
+const styleOptions = {
+  "default" : "Normal",
+   "circle" : "En círculo"
+};
+
+export {
+  styleOptions,topOptions,skinColorOptions,mouthOptions,hatColorOptions,hairColorOptions,facialHairColorOptions,facialHairOptions,eyesOptions,eyebrowsOptions,clothesGraphicOptions,clothesOptions,clothesColorOptions,accessoriesColorOptions,backgroundTypeOptions,backgroundColorOptions,accessoryOptions
+}

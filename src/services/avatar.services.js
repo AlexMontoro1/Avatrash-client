@@ -15,15 +15,10 @@ const createAvatarService = (newAvatar) => {
   const deleteAvatarService = (avatarId) => {
     return service.delete(`/avatar/${avatarId}`)
   }
-  
-  const createCommentService = (avatarId, newComment) => {
-    return service.post(`/avatar/${avatarId}/comment`, newComment)
-  }
 
   export { 
     createAvatarService,
     getAvatarDetailsService,
     editAvatarService,
-    deleteAvatarService,
-    createCommentService
+    deleteAvatarService
    };

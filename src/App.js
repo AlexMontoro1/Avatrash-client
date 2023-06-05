@@ -8,6 +8,8 @@ import IsPrivate from './components/auth/IsPrivate';
 import Navbar from './components/Navbar';
 import AvatarCreate from './pages/avatar/AvatarCreate';
 import EditProfile from './pages/profile/EditProfile';
+import AvatarDetails from './pages/avatar/AvatarDetails';
+import AvatarEdit from './pages/avatar/AvatarEdit';
 
 
 
@@ -22,6 +24,8 @@ function App() {
         <Route path='/profile' element={<IsPrivate> <Profile /> </IsPrivate>}/>
         <Route path='/avatar/create' element={<IsPrivate> <AvatarCreate /> </IsPrivate>} />
         <Route path='/profile/edit' element={<IsPrivate> <EditProfile /> </IsPrivate>}/>
+        <Route path="/avatar/:avatarId" element={<IsPrivate> <AvatarDetails /> </IsPrivate> }/>
+        <Route path="/avatar/:avatarId/edit" element={<IsPrivate> <AvatarEdit /> </IsPrivate> }/>
 
         {/* ERROR HANDLERS */}
 
