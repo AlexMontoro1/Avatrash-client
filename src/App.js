@@ -7,6 +7,7 @@ import Profile from './pages/profile/Profile';
 import IsPrivate from './components/auth/IsPrivate';
 import Navbar from './components/Navbar';
 import AvatarCreate from './pages/avatar/AvatarCreate';
+import EditProfile from './pages/profile/EditProfile';
 
 
 
@@ -19,7 +20,8 @@ function App() {
       <Routes>
         <Route path='/' element={<Home />}/>
         <Route path='/profile' element={<IsPrivate> <Profile /> </IsPrivate>}/>
-        <Route path='/avatar/create' element={<AvatarCreate />} />
+        <Route path='/avatar/create' element={<IsPrivate> <AvatarCreate /> </IsPrivate>} />
+        <Route path='/profile/edit' element={<IsPrivate> <EditProfile /> </IsPrivate>}/>
 
         {/* ERROR HANDLERS */}
 
