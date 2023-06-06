@@ -1,8 +1,9 @@
 import { useEffect, useState, useContext } from "react";
 import { AuthContext } from "../../context/auth.context";
 import { useParams, useNavigate, Link } from "react-router-dom";
-import { getAvatarDetailsService, deleteAvatarService } from "../../services/avatar.services"
+import { getAvatarDetailsService, deleteAvatarService, editAvatarService } from "../../services/avatar.services"
 import { createCommentService, deleteCommentService } from "../../services/comment.services"
+import { Orbit } from '@uiball/loaders'
 import {
   accessoryOptions,
   backgroundColorOptions,
@@ -35,7 +36,7 @@ function AvatarDetails() {
   const [ isLoading, setIsLoading ] = useState(true)
   const [ createComment, setCreateComment ] = useState("")
   const [ allComments, setAllComments ] = useState([])
-
+  const [ likes, setLikes ] = useState(0)
 
 
   const getData = async () => {
@@ -43,6 +44,7 @@ function AvatarDetails() {
       const response = await getAvatarDetailsService(avatarId)
       setAvatarDetails(response.data.avatar)
       setAllComments(response.data.comment)
+      setLikes(response.data.avatar.likes)
       setIsLoading(false)
     } catch (err) {
       navigate("/error")
@@ -94,13 +96,33 @@ function AvatarDetails() {
     }
   }
 
+  const handleLikes = async () => {
+    const editedAvatarData = {
+      likes: likes
+    }
+    try {
+      const response = await getAvatarDetailsService(avatarId)
+    const likesParam = response.data.avatar.likes
+    await editAvatarService(avatarId, editedAvatarData)
+    console.log(response.data);
+    setLikes(likesParam + 1);
+    } catch (err) {
+      navigate("/error")
+    }
+    
+  }
+
   
 
   if (isLoading) {
-    return <div>Loading...</div>;
+    return <Orbit 
+    size={25}
+    speed={1.5} 
+    color="black" 
+   />;
   }
 
-  const isAuthenticatedUser = avatarDetails.owner === user._id;
+  const isAuthenticatedUser = avatarDetails && avatarDetails.owner === user && user._id;
   const canEditOrDelete = isAuthenticatedUser ? (
     <div>
       <button onClick={handleDelete}>Borrar</button>
@@ -168,6 +190,10 @@ function AvatarDetails() {
         Estilo del avatar: {styleOptions[avatarDetails.style]}
       </li>
     </ul>
+    <div>
+        <h3>Likes: {likes}</h3>
+        <button onClick={handleLikes}>Like</button>
+      </div>
     {canEditOrDelete}
         <div>
           {allComments.map(({author, content, _id})=> {

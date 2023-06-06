@@ -47,6 +47,7 @@ function AvatarCreate() {
   const [top, setTop] = useState(['blank']);
   const [name, setName] = useState("")
   const [json, setJson] = useState(null)
+  const [likes, setLikes] = useState(0)
 
   
   useEffect(() => {
@@ -85,7 +86,8 @@ function AvatarCreate() {
         accessories : [accessory],
         accessoriesProbability: 100,
         backgroundColor : [backgroundColor],
-        name
+        name,
+        likes
       });
       setJson(avatar.toJson())
       console.log(avatar)
@@ -117,7 +119,8 @@ function AvatarCreate() {
         style,
         top,
         name,
-        json
+        json,
+        likes
       };
   
       await createAvatarService(avatarData)

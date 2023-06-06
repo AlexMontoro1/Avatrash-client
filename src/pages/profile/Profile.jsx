@@ -1,6 +1,9 @@
 import { useEffect, useState } from "react";
 import { Link, useNavigate } from "react-router-dom";
 import { getProfileService } from "../../services/profile.services"
+import { Orbit } from '@uiball/loaders'
+
+
 
 function Profile() {
   const navigate = useNavigate()
@@ -28,7 +31,11 @@ function Profile() {
   return (
     
     <div>
-      {isLoading === true ? <h3>...Cargando</h3> : 
+      {isLoading === true ? <Orbit 
+ size={25}
+ speed={1.5} 
+ color="black" 
+/> : 
       <div>
         <h4>Usuario: {user.username}</h4>
         <h4>Correo: {user.email}</h4>
