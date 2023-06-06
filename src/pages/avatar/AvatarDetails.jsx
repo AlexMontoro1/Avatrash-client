@@ -57,6 +57,14 @@ function AvatarDetails() {
     }
   }
 
+  const handleCreateComment = () => {
+    try {
+      
+    } catch (error) {
+      
+    }
+  }
+
   if (isLoading) {
     return <div>Loading...</div>;
   }
