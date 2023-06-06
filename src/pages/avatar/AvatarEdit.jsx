@@ -6,7 +6,6 @@ import {  useParams, useNavigate } from "react-router-dom";
 import {
   accessoryOptions,
   backgroundColorOptions,
-  backgroundTypeOptions,
   accessoriesColorOptions,
   clothesColorOptions,
   clothesOptions,
@@ -28,11 +27,10 @@ function AvatarEdit() {
 
   const navigate = useNavigate()
 
+  // accesorios de Avatr
   const [seed, setSeed] = useState('Felix');
-  const [accessory, setAccessory] = useState('blank');
-  const [avatarSvg, setAvatarSvg] = useState('');
-  const [backgroundColor, setBackgroundColor] = useState('65c9ff');
-  const [backgroundType, setBackgroundType] = useState('solid');
+  const [accessory, setAccessory] = useState('blank')
+  const [backgroundColor, setBackgroundColor] = useState(['65c9ff']);
   const [accessoriesColor, setAccessoriesColor] = useState(['3c4f5c']);
   const [clothesColor, setClothesColor] = useState(['ff5c5c']);
   const [clothing, setClothing] = useState(['blank']);
@@ -47,29 +45,12 @@ function AvatarEdit() {
   const [skinColor, setSkinColor] = useState(['d08b5b']);
   const [style, setStyle] = useState(['default']);
   const [top, setTop] = useState(['blank']);
+
+  // otros
   const [name, setName] = useState("");
   const [json, setJson] = useState(null);
-  const [editedSeed, setEditedSeed] = useState('Felix');
-  const [editedAccessory, setEditedAccessory] = useState('blank');
-  const [editedAvatarSvg, setEditedAvatarSvg] = useState('');
-  const [editedBackgroundColor, setEditedBackgroundColor] = useState('65c9ff');
-  const [editedBackgroundType, setEditedBackgroundType] = useState('solid');
-  const [editedAccessoriesColor, setEditedAccessoriesColor] = useState(['3c4f5c']);
-  const [editedClothesColor, setEditedClothesColor] = useState(['ff5c5c']);
-  const [editedClothing, setEditedClothing] = useState(['blank']);
-  const [editedClothingGraphic, setEditedClothingGraphic] = useState(['bear']);
-  const [editedEyebrows, setEditedEyebrows] = useState(['default']);
-  const [editedEyes, setEditedEyes] = useState(['default']);
-  const [editedFacialHair, setEditedFacialHair] = useState(['blank']);
-  const [editedFacialHairColor, setEditedFacialHairColor] = useState(['724133']);
-  const [editedHairColor, setEditedHairColor] = useState(['a55728']);
-  const [editedHatColor, setEditedHatColor] = useState(['5199e4']);
-  const [editedMouth, setEditedMouth] = useState(['default']);
-  const [editedSkinColor, setEditedSkinColor] = useState(['d08b5b']);
-  const [editedStyle, setEditedStyle] = useState(['default']);
-  const [editedTop, setEditedTop] = useState(['blank']);
-  const [editedName, setEditedName] = useState("");
-  const [editedJson, setEditedJson] = useState(null);
+  const [avatarSvg, setAvatarSvg] = useState('');
+  
 
   useEffect(() => {
     const fetchAvatar = async () => {
@@ -77,59 +58,58 @@ function AvatarEdit() {
         const avatar = await getAvatarDetailsService(avatarId);
         const avatarData = avatar.data.avatar;
 
-        setEditedSeed(avatarData.seed);
-        setEditedAccessory(avatarData.accessories);
-        setEditedBackgroundColor(avatarData.backgroundColor);
-        setEditedBackgroundType(avatarData.backgroundType);
-        setEditedAccessoriesColor(avatarData.accessoriesColor);
-        setEditedClothesColor(avatarData.clothesColor);
-        setEditedClothing(avatarData.clothing);
-        setEditedClothingGraphic(avatarData.clothingGraphic);
-        setEditedEyebrows(avatarData.eyebrows);
-        setEditedEyes(avatarData.eyes);
-        setEditedFacialHair(avatarData.facialHair);
-        setEditedFacialHairColor(avatarData.facialHairColor);
-        setEditedHairColor(avatarData.hairColor);
-        setEditedHatColor(avatarData.hatColor);
-        setEditedMouth(avatarData.mouth);
-        setEditedSkinColor(avatarData.skinColor);
-        setEditedStyle(avatarData.style);
-        setEditedTop(avatarData.top);
-        setEditedName(avatarData.name);
-        setEditedAvatarSvg(avatarData.json.svg);
-        setEditedJson(avatarData.json);
+        setSeed(avatarData.seed);
+        setAccessory(avatarData.accessories);
+        setBackgroundColor(avatarData.backgroundColor);
+        setAccessoriesColor(avatarData.accessoriesColor);
+        setClothesColor(avatarData.clothesColor);
+        setClothing(avatarData.clothing);
+        setClothingGraphic(avatarData.clothingGraphic);
+        setEyebrows(avatarData.eyebrows);
+        setEyes(avatarData.eyes);
+        setFacialHair(avatarData.facialHair);
+        setFacialHairColor(avatarData.facialHairColor);
+        setHairColor(avatarData.hairColor);
+        setHatColor(avatarData.hatColor);
+        setMouth(avatarData.mouth);
+        setSkinColor(avatarData.skinColor);
+        setStyle(avatarData.style);
+        setTop(avatarData.top);
+
+        setName(avatarData.name);
+        //setAvatarSvg(avatarData.json.svg);
+        //setJson(avatarData.json);
       } catch (error) {
         navigate('/error');
       }
     };
 
     fetchAvatar();
-  }, [avatarId, navigate]);
+  }, [avatarId]);
 
   const handleSubmit = async (e) => {
     e.preventDefault();
 
     const editedAvatarData = {
-      seed: editedSeed,
-      accessories: editedAccessory,
-      backgroundColor: editedBackgroundColor,
-      backgroundType: editedBackgroundType,
-      accessoriesColor: editedAccessoriesColor,
-      clothesColor: editedClothesColor,
-      clothing: editedClothing,
-      clothingGraphic: editedClothingGraphic,
-      eyebrows: editedEyebrows,
-      eyes: editedEyes,
-      facialHair: editedFacialHair,
-      facialHairColor: editedFacialHairColor,
-      hairColor: editedHairColor,
-      hatColor: editedHatColor,
-      mouth: editedMouth,
-      skinColor: editedSkinColor,
-      style: editedStyle,
-      top: editedTop,
-      name: editedName,
-      json: editedJson,
+      seed,
+      accessories: accessory,
+      backgroundColor,
+      accessoriesColor,
+      clothesColor,
+      clothing,
+      clothingGraphic,
+      eyebrows,
+      eyes,
+      facialHair,
+      facialHairColor,
+      hairColor,
+      hatColor,
+      mouth,
+      skinColor,
+      style,
+      top,
+      name,
+      json
     };
 
     try {
@@ -149,59 +129,42 @@ function AvatarEdit() {
           scale: 100,
           radius: 0,
           size: 64,
-          backgroundType: [editedBackgroundType],
           backgroundRotation: 0,
           translateX: 0,
           translateY: 0,
           clip: true,
           randomizeIds: false,
-          accessoriesColor: [editedAccessoriesColor],
+          accessoriesColor: [accessoriesColor],
           base: ["default"],
-          clothesColor: [editedClothesColor],
-          clothing: [editedClothing],
-          clothingGraphic: [editedClothingGraphic],
-          eyebrows: [editedEyebrows],
-          eyes:[editedEyes],
-          facialHair: [editedFacialHair],
-          facialHairColor: [editedFacialHairColor],
+          clothesColor: [clothesColor],
+          clothing: [clothing],
+          clothingGraphic: [clothingGraphic],
+          eyebrows: [eyebrows],
+          eyes:[eyes],
+          facialHair: [facialHair],
+          facialHairColor: [facialHairColor],
           facialHairProbability: 100,
-          hairColor: [editedHairColor],
-          hatColor: [editedHatColor],
-          mouth: [editedMouth],
+          hairColor: [hairColor],
+          hatColor: [hatColor],
+          mouth: [mouth],
           nose: ["default"],
-          skinColor: [editedSkinColor],
-          style: [editedStyle],
-          top: [editedTop],
+          skinColor: [skinColor],
+          style: [style],
+          top: [top],
           topProbability: 100,
-          accessories : [editedAccessory],
+          accessories : [accessory],
           accessoriesProbability: 100,
-          backgroundColor : [editedBackgroundColor],
+          backgroundColor : [backgroundColor],
           name
         });
       
-    
-    setEditedAvatarSvg(avatar);
+      setJson(avatar.toJson())
+      setAvatarSvg(avatar);
+      
     }
     generateAvatar()
   }, [
-    seed,
-    accessory,
-    backgroundColor,
-    backgroundType,
-    accessoriesColor,
-    clothesColor,
-    clothing,
-    clothingGraphic,
-    eyebrows,
-    eyes,
-    facialHair,
-    facialHairColor,
-    hairColor,
-    hatColor,
-    mouth,
-    skinColor,
-    style,
-    top,
+    seed, accessory, backgroundColor, accessoriesColor, clothesColor, clothing, clothingGraphic, eyebrows, eyes, facialHair, facialHairColor, hairColor, hatColor, mouth, skinColor, style, top
   ]);
  
 
@@ -214,8 +177,8 @@ function AvatarEdit() {
   <label htmlFor="skinColor-select">Color de piel:</label>
   <select
     id="skinColor-select"
-    value={editedSkinColor}
-    onChange={(e) => setEditedSkinColor(e.target.value)}
+    value={skinColor}
+    onChange={(e) => setSkinColor(e.target.value)}
   >
     {Object.entries(skinColorOptions).map((([colorCode, colorName]) => <option value={colorCode} key={colorCode}>{colorName}</option>
         ))}
@@ -224,7 +187,7 @@ function AvatarEdit() {
 
 <div>
   <label htmlFor="style-select">Estilo:</label>
-  <select id="style-select" value={editedStyle} onChange={(e) => setEditedStyle(e.target.value)}>
+  <select id="style-select" value={style} onChange={(e) => setStyle(e.target.value)}>
   {Object.entries(styleOptions).map((([paramCode, paramName]) => <option value={paramCode} key={paramCode}>{paramName}</option>
     ))}
   </select>
@@ -232,7 +195,7 @@ function AvatarEdit() {
 
     <div>
       <label htmlFor="accessory-select">Accesorio:</label>
-      <select id="accessory-select" value={editedAccessory} onChange={(e) => setEditedAccessory(e.target.value)}>
+      <select id="accessory-select" value={accessory} onChange={(e) => setAccessory(e.target.value)}>
       {Object.entries(accessoryOptions).map((([paramCode, paramName]) => <option value={paramCode} key={paramCode}>{paramName}</option>
         ))}
         
@@ -243,8 +206,8 @@ function AvatarEdit() {
   <label htmlFor="accessoriesColor-select">Color del accesorio:</label>
   <select
     id="accessoriesColor-select"
-    value={editedAccessoriesColor}
-    onChange={(e) => setEditedAccessoriesColor(e.target.value)}
+    value={accessoriesColor}
+    onChange={(e) => setAccessoriesColor(e.target.value)}
   >
     {Object.entries(accessoriesColorOptions).map((([colorCode, colorName]) => <option value={colorCode} key={colorCode}>{colorName}</option>
         ))}
@@ -253,7 +216,7 @@ function AvatarEdit() {
 
     <div>
       <label htmlFor="backgroundColor-select">Color de fondo:</label>
-      <select id="backgroundColor-select" value={editedBackgroundColor} onChange={(e) => setEditedBackgroundColor(e.target.value)}>
+      <select id="backgroundColor-select" value={backgroundColor} onChange={(e) => setBackgroundColor(e.target.value)}>
         {Object.entries(backgroundColorOptions).map(([colorCode, colorName]) => <option value={colorCode} key={colorCode}>{colorName}</option>
         )}
         
@@ -265,8 +228,8 @@ function AvatarEdit() {
   <label htmlFor="clothing-select">Ropa:</label>
   <select
     id="clothing-select"
-    value={editedClothing}
-    onChange={(e) => setEditedClothing(e.target.value)}
+    value={clothing}
+    onChange={(e) => setClothing(e.target.value)}
   >
      {Object.entries(clothesOptions).map((([paramCode, paramName]) => <option value={paramCode} key={paramCode}>{paramName}</option>
     ))}
@@ -277,8 +240,8 @@ function AvatarEdit() {
   <label htmlFor="clothesColor-select">Color de la ropa:</label>
   <select
     id="clothesColor-select"
-    value={editedClothesColor}
-    onChange={(e) => setEditedClothesColor(e.target.value)}
+    value={clothesColor}
+    onChange={(e) => setClothesColor(e.target.value)}
   >
     {Object.entries(clothesColorOptions).map(([colorCode, colorName]) => <option value={colorCode} key={colorCode}>{colorName}</option>
         )}
@@ -289,8 +252,8 @@ function AvatarEdit() {
   <label htmlFor="clothingGraphic-select">Gráfico de la ropa:</label>
   <select
     id="clothingGraphic-select"
-    value={editedClothingGraphic}
-    onChange={(e) => setEditedClothingGraphic(e.target.value)}
+    value={clothingGraphic}
+    onChange={(e) => setClothingGraphic(e.target.value)}
   >
      {Object.entries(clothesGraphicOptions).map((([paramCode, paramName]) => <option value={paramCode} key={paramCode}>{paramName}</option>
     ))}
@@ -299,7 +262,7 @@ function AvatarEdit() {
 
 <div>
   <label htmlFor="eyebrows-select">Cejas:</label>
-  <select id="eyebrows-select" value={editedEyebrows} onChange={(e) => setEditedEyebrows(e.target.value)}>
+  <select id="eyebrows-select" value={eyebrows} onChange={(e) => setEyebrows(e.target.value)}>
   {Object.entries(eyebrowsOptions).map((([paramCode, paramName]) => <option value={paramCode} key={paramCode}>{paramName}</option>
     ))}
   </select>
@@ -307,7 +270,7 @@ function AvatarEdit() {
 
 <div>
   <label htmlFor="eyes-select">Ojos:</label>
-  <select id="eyes-select" value={editedEyes} onChange={(e) => setEditedEyes(e.target.value)}>
+  <select id="eyes-select" value={eyes} onChange={(e) => setEyes(e.target.value)}>
   {Object.entries(eyesOptions).map((([paramCode, paramName]) => <option value={paramCode} key={paramCode}>{paramName}</option>
     ))}
   </select>
@@ -317,8 +280,8 @@ function AvatarEdit() {
   <label htmlFor="facialHair-select">Vello facial:</label>
   <select
     id="facialHair-select"
-    value={editedFacialHair}
-    onChange={(e) => setEditedFacialHair(e.target.value)}
+    value={facialHair}
+    onChange={(e) => setFacialHair(e.target.value)}
   >
      {Object.entries(facialHairOptions).map((([paramCode, paramName]) => <option value={paramCode} key={paramCode}>{paramName}</option>
     ))}
@@ -329,8 +292,8 @@ function AvatarEdit() {
   <label htmlFor="facialHairColor-select">Color del vello facial:</label>
   <select
     id="facialHairColor-select"
-    value={editedFacialHairColor}
-    onChange={(e) => setEditedFacialHairColor(e.target.value)}
+    value={facialHairColor}
+    onChange={(e) => setFacialHairColor(e.target.value)}
   >
     {Object.entries(facialHairColorOptions).map(([colorCode, colorName]) => <option value={colorCode} key={colorCode}>{colorName}</option>
         )}
@@ -339,7 +302,7 @@ function AvatarEdit() {
 
 <div>
   <label htmlFor="mouth-select">Boca:</label>
-  <select id="mouth-select" value={editedMouth} onChange={(e) => setEditedMouth(e.target.value)}>
+  <select id="mouth-select" value={mouth} onChange={(e) => setMouth(e.target.value)}>
   {Object.entries(mouthOptions).map((([paramCode, paramName]) => <option value={paramCode} key={paramCode}>{paramName}</option>
     ))}
   </select>
@@ -347,7 +310,7 @@ function AvatarEdit() {
 
 <div>
   <label htmlFor="top-select">Pelo o gorro:</label>
-  <select id="top-select" value={editedTop} onChange={(e) => setEditedTop(e.target.value)}>
+  <select id="top-select" value={top} onChange={(e) => setTop(e.target.value)}>
   {Object.entries(topOptions).map((([paramCode, paramName]) => <option value={paramCode} key={paramCode}>{paramName}</option>
     ))}
   </select>
@@ -355,7 +318,7 @@ function AvatarEdit() {
 
 <div>
   <label htmlFor="hairColor-select">Color del pelo:</label>
-  <select id="hairColor-select" value={editedHairColor} onChange={(e) => setEditedHairColor(e.target.value)}>
+  <select id="hairColor-select" value={hairColor} onChange={(e) => setHairColor(e.target.value)}>
   {Object.entries(hairColorOptions).map(([colorCode, colorName]) => <option value={colorCode} key={colorCode}>{colorName}</option>
         )}
   </select>
@@ -363,7 +326,7 @@ function AvatarEdit() {
 
 <div>
   <label htmlFor="hatColor-select">Color del gorro:</label>
-  <select id="hatColor-select" value={editedHatColor} onChange={(e) => setEditedHatColor(e.target.value)}>
+  <select id="hatColor-select" value={hatColor} onChange={(e) => setHatColor(e.target.value)}>
   {Object.entries(hatColorOptions).map(([colorCode, colorName]) => <option value={colorCode} key={colorCode}>{colorName}</option>
         )}
   </select>
@@ -372,9 +335,9 @@ function AvatarEdit() {
 
 
     <div>
-      {editedAvatarSvg && (
+      {avatarSvg && (
         <img
-          src={`data:image/svg+xml;utf8,${encodeURIComponent(editedAvatarSvg)}`}
+          src={`data:image/svg+xml;utf8,${encodeURIComponent(avatarSvg)}`}
           alt="avatar"
           style={{ width: '300px', height: '300px' }}
         />
@@ -383,7 +346,7 @@ function AvatarEdit() {
 
     <div>
   <label htmlFor="name">Nombre:</label>
-  <input type="text" placeholder="...nombre del avatar" id="name" value={editedName} onChange={(e) => setEditedName(e.target.value)}>
+  <input type="text" placeholder="...nombre del avatar" id="name" value={name} onChange={(e) => setName(e.target.value)}>
   </input>
   </div>
 

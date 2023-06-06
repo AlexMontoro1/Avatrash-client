@@ -29,7 +29,7 @@ function AvatarCreate() {
   const [seed, setSeed] = useState('Felix');
   const [accessory, setAccessory] = useState('blank');
   const [avatarSvg, setAvatarSvg] = useState('');
-  const [backgroundColor, setBackgroundColor] = useState('65c9ff');
+  const [backgroundColor, setBackgroundColor] = useState(['65c9ff']);
   const [backgroundType, setBackgroundType] = useState('solid');
   const [accessoriesColor, setAccessoriesColor] = useState(['3c4f5c']);
   const [clothesColor, setClothesColor] = useState(['ff5c5c']);

@@ -26,6 +26,7 @@ function NavBar() {
     <>
       <DropdownButton id="dropdown-basic-button" title="Dropdown button">
         <Dropdown.Item href="/">Home</Dropdown.Item>
+        <Dropdown.Item href="/catalog">Catálogo de Avatares</Dropdown.Item>
         <Dropdown.Item href="/avatar/create">Create Avatar</Dropdown.Item>
       </DropdownButton>
 

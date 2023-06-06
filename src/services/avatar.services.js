@@ -1,5 +1,9 @@
 import service from "./config.services.js";
 
+const getAvatarsService = () => {
+  return service.get("/avatar")
+}
+
 const createAvatarService = (newAvatar) => {
     return service.post("/avatar/create", newAvatar)
   }
@@ -8,8 +12,8 @@ const createAvatarService = (newAvatar) => {
     return service.get(`/avatar/${avatarId}`)
   }
   
-  const editAvatarService = (avatarId) => {
-    return service.put(`/avatar/${avatarId}`)
+  const editAvatarService = (avatarId, editedAvatarData) => {
+    return service.put(`/avatar/${avatarId}`, editedAvatarData)
   }
   
   const deleteAvatarService = (avatarId) => {
@@ -17,6 +21,7 @@ const createAvatarService = (newAvatar) => {
   }
 
   export { 
+    getAvatarsService,
     createAvatarService,
     getAvatarDetailsService,
     editAvatarService,
