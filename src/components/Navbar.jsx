@@ -6,11 +6,12 @@ import Login from "./auth/Login";
 import { AuthContext } from "../context/auth.context";
 import { useContext } from "react";
 import { useNavigate } from "react-router-dom"
+import { Nav } from "react-bootstrap";
 
 function NavBar() {
   const navigate = useNavigate();
 
-  const { isLoggedIn, authenticateUser } = useContext(AuthContext);
+  const { isLoggedIn, authenticateUser, isAdmin } = useContext(AuthContext);
 
   const handleLogout = () => {
     // 1. borrar el token
@@ -23,22 +24,23 @@ function NavBar() {
     navigate("/");
   };
   return (
-    <>
-      <DropdownButton id="dropdown-basic-button" title="Dropdown button">
+    <Nav className="custom-navbar d-flex justify-content-around">
+      <DropdownButton id="dropdown-basic-button" title="General">
         <Dropdown.Item href="/">Home</Dropdown.Item>
         <Dropdown.Item href="/catalog">Catálogo de Avatares</Dropdown.Item>
         <Dropdown.Item href="/avatar/create">Create Avatar</Dropdown.Item>
       </DropdownButton>
 
-      <DropdownButton id="dropdown-basic-button" title="Dropdown button">
+      <DropdownButton id="dropdown-basic-button" title="Personal">
         {!isLoggedIn && <Signin />}
         {!isLoggedIn && <Login />}
         {isLoggedIn && <Dropdown.Item href="/profile">Perfil</Dropdown.Item>}
+        {isAdmin() && <Dropdown.Item href="/admin">Admin</Dropdown.Item>}
         {isLoggedIn && (
           <Dropdown.Item onClick={handleLogout}>Cerrar Sesion</Dropdown.Item>
         )}
       </DropdownButton>
-    </>
+    </Nav>
   );
 }
 

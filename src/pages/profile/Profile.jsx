@@ -1,6 +1,6 @@
 import { useEffect, useState } from "react";
 import { Link, useNavigate } from "react-router-dom";
-import { getProfileService } from "../../services/profile.services"
+import { getProfileService, uploadImage } from "../../services/profile.services"
 import { Orbit } from '@uiball/loaders'
 
 
@@ -11,6 +11,7 @@ function Profile() {
   const [ user, setUser ] = useState()
   const [ isLoading, setIsLoading ] = useState(true)
   const [avatars, setAvatars] = useState([]);
+  const [selectedImage, setSelectedImage] = useState(null);
 
   const getData = async () => {
     try {
@@ -28,6 +29,33 @@ function Profile() {
   useEffect(()=> {
     getData()
   },[])
+
+  const handleImageChange = (event) => {
+    setSelectedImage(event.target.files[0]);
+  };
+
+  const handleImageUpload = async (event) => {
+    event.preventDefault();
+
+    if (selectedImage) {
+      const formData = new FormData();
+      formData.append("image", selectedImage);
+
+      try {
+        const response = await uploadImage(formData);
+        console.log(response);
+        const newImageUrl = response.data.imageUrl;
+
+       
+        setUser((prevUser) => ({
+          ...prevUser,
+          image: newImageUrl
+        }));
+      } catch (err) {
+        console.error(err);
+      }
+    }
+  };
   return (
     
     <div>
@@ -37,6 +65,13 @@ function Profile() {
  color="black" 
 /> : 
       <div>
+        {user && user.image && (
+            <img src={user.image} alt="Imagen de perfil" width="200px" />
+          )}
+        <form onSubmit={handleImageUpload}>
+          <input type="file" onChange={handleImageChange} />
+          <button type="submit">Subir Imagen</button>
+        </form>
         <h4>Usuario: {user.username}</h4>
         <h4>Correo: {user.email}</h4>
         <p>Creado el dia: {new Date(user.createdAt).toLocaleString()}</p>

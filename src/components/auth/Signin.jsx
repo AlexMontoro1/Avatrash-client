@@ -39,7 +39,10 @@ function Signin() {
       console.log(error);
       if (error.response.status === 400) {
         setErrorMessage(error.response.data.errorMessage);
-      } else {
+      } else if (error.response.status === 500) {
+        setErrorMessage(error.response.data.errorMessage);
+      }
+      else {
         navigate("/error");
       }
     }

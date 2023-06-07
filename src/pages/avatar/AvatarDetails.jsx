@@ -122,7 +122,7 @@ function AvatarDetails() {
    />;
   }
 
-  const isAuthenticatedUser = avatarDetails && avatarDetails.owner === user && user._id;
+  const isAuthenticatedUser = avatarDetails.owner?.toString() === user?._id?.toString();
   const canEditOrDelete = isAuthenticatedUser ? (
     <div>
       <button onClick={handleDelete}>Borrar</button>

@@ -8,7 +8,12 @@ const editProfileService = (updatedProfile) => {
     return service.put("/profile/edit", updatedProfile)
 }
 
+const uploadImage = (formData) => {
+    return service.put("/profile/main", formData);
+  };
+
 export {
     getProfileService,
-    editProfileService
+    editProfileService,
+    uploadImage
 }

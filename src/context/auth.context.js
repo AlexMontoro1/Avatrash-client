@@ -1,6 +1,7 @@
 import { createContext, useEffect, useState } from "react";
 import { verifyService } from "../services/auth.services";
 import { Orbit } from '@uiball/loaders'
+import { getProfileService } from "../services/profile.services";
 const AuthContext = createContext();
 
 function AuthWrapper({ children }) {
@@ -30,11 +31,16 @@ function AuthWrapper({ children }) {
     authenticateUser();
   }, []);
 
-  // el objeto de contexto que vamos a pasar
+  
+  const isAdmin = () => {
+    return user && user.role === "admin";
+  };
+
   const passedContext = {
     isLoggedIn,
     user,
     authenticateUser,
+    isAdmin
   };
   if (isLoading) {
     return (
