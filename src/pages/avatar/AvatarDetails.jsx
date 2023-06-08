@@ -1,13 +1,14 @@
 import { useEffect, useState, useContext } from "react";
+import { createAvatar } from '@dicebear/core';
+import { avataaars } from '@dicebear/collection';
 import { AuthContext } from "../../context/auth.context";
 import { useParams, useNavigate, Link } from "react-router-dom";
-import { getAvatarDetailsService, deleteAvatarService, editAvatarService } from "../../services/avatar.services"
+import { getAvatarDetailsService, deleteAvatarService, likeAvatarService, editAvatarService  } from "../../services/avatar.services"
 import { createCommentService, deleteCommentService } from "../../services/comment.services"
 import { Orbit } from '@uiball/loaders'
 import {
   accessoryOptions,
   backgroundColorOptions,
-  backgroundTypeOptions,
   accessoriesColorOptions,
   clothesColorOptions,
   clothesOptions,
@@ -36,7 +37,8 @@ function AvatarDetails() {
   const [ isLoading, setIsLoading ] = useState(true)
   const [ createComment, setCreateComment ] = useState("")
   const [ allComments, setAllComments ] = useState([])
-  const [ likes, setLikes ] = useState(0)
+  const [likesNumber, setLikesNumber] = useState(0);
+
 
 
   const getData = async () => {
@@ -44,7 +46,7 @@ function AvatarDetails() {
       const response = await getAvatarDetailsService(avatarId)
       setAvatarDetails(response.data.avatar)
       setAllComments(response.data.comment)
-      setLikes(response.data.avatar.likes)
+      setLikesNumber(response.data.avatar.likes.length)
       setIsLoading(false)
     } catch (err) {
       navigate("/error")
@@ -74,7 +76,6 @@ function AvatarDetails() {
       await createCommentService(avatarId, newComment)
       const response = await getAvatarDetailsService(avatarId)
       const comments = response.data.comment
-      console.log(comments)
       setAllComments(comments)
       setCreateComment("")
       ;
@@ -97,20 +98,50 @@ function AvatarDetails() {
   }
 
   const handleLikes = async () => {
-    const editedAvatarData = {
-      likes: likes
-    }
     try {
-      const response = await getAvatarDetailsService(avatarId)
-    const likesParam = response.data.avatar.likes
-    await editAvatarService(avatarId, editedAvatarData)
-    console.log(response.data);
-    setLikes(likesParam + 1);
-    } catch (err) {
-      navigate("/error")
+      const response = await likeAvatarService(avatarId);
+      console.log(response.data);
+      const likes = response.data.length
+      setLikesNumber(likes)
+    } catch (error) {
+      console.log(error);
     }
-    
-  }
+  };
+  const handleDownload = () => {
+    console.log(avatarDetails);
+    if (avatarDetails) {
+      const avatar = createAvatar(avataaars, {
+          backgroundRotation: 0,
+          translateX: 0,
+          translateY: 0,
+          clip: true,
+          randomizeIds: false,
+        accessories: avatarDetails.accessories,
+        accessoriesColor: avatarDetails.accessoriesColor,
+        //base: ["default"],
+        backgroundColor: avatarDetails.backgroundColor,
+        clothesColor: avatarDetails.clothesColor,
+        clothing: avatarDetails.clothing,
+        clothingGraphic: avatarDetails.clothingGraphic,
+        eyebrows: avatarDetails.eyebrows,
+        eyes: avatarDetails.eyes,
+        facialHair: avatarDetails.facialHair,
+        facialHairProbability: 100,
+        facialHairColor: avatarDetails.facialHairColor,
+        hairColor: avatarDetails.hairColor,
+        hatColor: avatarDetails.hatColor,
+        mouth: avatarDetails.mouth,
+        nose: ["default"],
+        skinColor: avatarDetails.skinColor,
+        topProbability: 100,
+        top: avatarDetails.top,
+        accessoriesProbability: 100,
+        style: avatarDetails.style,
+      });
+      const png = avatar.png();
+      png.toFile('avatar.png');
+    }
+  };
 
   
 
@@ -142,6 +173,7 @@ function AvatarDetails() {
       alt="avatar"
       style={{ width: "300px", height: "300px" }}
     />
+    <button onClick={handleDownload}>Descargar Avatar</button>
     <ul>
       <li>
         Accesorio: {accessoryOptions[avatarDetails.accessories]} - Color:{" "}
@@ -191,8 +223,8 @@ function AvatarDetails() {
       </li>
     </ul>
     <div>
-        <h3>Likes: {likes}</h3>
-        <button onClick={handleLikes}>Like</button>
+    <h3>Likes: {likesNumber}</h3>
+      <button onClick={handleLikes}>Like</button>
       </div>
     {canEditOrDelete}
         <div>

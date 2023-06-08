@@ -20,10 +20,17 @@ const createAvatarService = (newAvatar) => {
     return service.delete(`/avatar/${avatarId}`)
   }
 
+  const likeAvatarService = (avatarId) => {
+    return service.post(`/avatar/${avatarId}/like`);
+  };
+  
+
+
   export { 
     getAvatarsService,
     createAvatarService,
     getAvatarDetailsService,
     editAvatarService,
-    deleteAvatarService
+    deleteAvatarService,
+    likeAvatarService
    };

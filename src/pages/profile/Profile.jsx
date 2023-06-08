@@ -22,6 +22,7 @@ function Profile() {
       setIsLoading(false)
 
     } catch (err) {
+      console.log(err)
       navigate("/error")
     }
   }

@@ -9,10 +9,11 @@ function Catalog() {
 
   const navigate = useNavigate()
 
-  const [ avatars, setAvatars ] = useState()
+  const [ avatars, setAvatars ] = useState([])
   const [ isLoading, setIsLoading ] = useState(true)
   const [searchQuery, setSearchQuery] = useState("");
   const [filteredAvatars, setFilteredAvatars] = useState([]);
+  const [isSorted, setIsSorted] = useState(false);
 
   const getData = async () => {
     try {
@@ -29,17 +30,29 @@ function Catalog() {
     getData()
   }, [])
 
-  const handleSearch = (e) => {
-    const query = e.target.value.toLowerCase();
-    setSearchQuery(query);
-  
+  useEffect(() => {
     const filtered = avatars.filter((avatar) =>
-      avatar.name.toLowerCase().includes(query)
+      avatar.name.toLowerCase().includes(searchQuery.toLowerCase())
     );
-    setFilteredAvatars(filtered);
+
+    let sorted = [...filtered];
+    if (isSorted) {
+      sorted = sorted.sort((a, b) => b.likes.length - a.likes.length);
+    }
+
+    setFilteredAvatars(sorted);
+  }, [avatars, searchQuery, isSorted]);
+
+  const handleSearch = (e) => {
+    const query = e.target.value;
+    setSearchQuery(query);
   };
 
-  const displayAvatars = searchQuery ? filteredAvatars : avatars;
+  const handleSortByPopularity = () => {
+    setIsSorted(!isSorted);
+  };
+
+  const displayAvatars = isSorted ? filteredAvatars : (searchQuery ? filteredAvatars : avatars);
 
   return (
     <div>
@@ -57,6 +70,14 @@ function Catalog() {
             value={searchQuery}
             onChange={handleSearch}
           />
+          <label>
+            Ordenar por popularidad:
+            <input
+              type="checkbox"
+              checked={isSorted}
+              onChange={handleSortByPopularity}
+            />
+          </label>
           {displayAvatars.map((avatar) => (
             <div key={avatar._id}>
               <h3>{avatar.name}</h3>
