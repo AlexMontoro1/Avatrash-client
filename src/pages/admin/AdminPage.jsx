@@ -2,6 +2,7 @@ import { useEffect, useState } from "react";
 import { useNavigate } from "react-router-dom";
 import { getFeedbackService } from "../../services/feedback.services"
 import { Orbit } from '@uiball/loaders'
+import { Container, Row, Col } from "react-bootstrap";
 
 function AdminPage() {
 
@@ -42,17 +43,34 @@ function AdminPage() {
 
  return (
 
-    
-      <div>
-        <h1>Página de administrador</h1>
-        <h2>Feedback enviado:</h2>
-        {feedback.map(({ contentDislike, contentLike, _id }) => (
-          <div key={_id}>
-            <p>Qué podría mejorar: {contentDislike}</p>
-            <p>Qué te ha gustado: {contentLike}</p>
-          </div>
-        ))}
-      </div>
+  
+  <Container style={{textAlign: "center", color: "white"}}>
+    <Row>
+      <Col xs={12}>
+        <h1 className="text-center">Página de administrador</h1>
+        <h2 className="text-center">Feedback enviado:</h2>
+      </Col>
+    </Row>
+    <Row>
+      <Col xs={6}>
+        <h3>Qué podría mejorar:</h3>
+        <ul style={{listStyle: "none"}}>
+          {feedback.map(({ contentDislike, _id }) => (
+            <li key={_id}>{contentDislike}</li>
+          ))}
+        </ul>
+      </Col>
+      <Col xs={6}>
+        <h3>Qué te ha gustado:</h3>
+        <ul style={{listStyle: "none"}}>
+          {feedback.map(({ contentLike, _id }) => (
+            <li key={_id}>{contentLike}</li>
+          ))}
+        </ul>
+      </Col>
+    </Row>
+  </Container>
+
    
 );
 }

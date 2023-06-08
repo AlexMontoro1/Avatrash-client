@@ -24,7 +24,7 @@ function NavBar() {
     navigate("/");
   };
   return (
-    <Nav className="custom-navbar d-flex justify-content-around">
+    <Nav  className="custom-navbar d-flex justify-content-around">
       <DropdownButton id="dropdown-basic-button" title="General">
         <Dropdown.Item href="/">Home</Dropdown.Item>
         <Dropdown.Item href="/catalog">Catálogo de Avatares</Dropdown.Item>

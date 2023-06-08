@@ -14,12 +14,17 @@ html,
 body {
   height: 100%;
   width: 100%;
-  overflow: hidden;
+  
 }
 
 body {
   min-height: 100vh;
   background:#3F454F ;
+}
+
+label {
+  text-align: center;
+  color: white;
 }
 
 .custom-navbar {
@@ -31,6 +36,18 @@ body {
 
 .custom-navbar .btn {
   margin-right: 10px;
+}
+
+.feedback-alert {
+  position: fixed;
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -50%);
+  z-index: 9999;
+}
+
+.dropdown-menu {
+  z-index: 9999;
 }
 
 .glowing-btn {

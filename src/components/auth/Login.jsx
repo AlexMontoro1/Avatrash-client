@@ -2,6 +2,7 @@ import React, { useState, useContext } from "react";
 import { useNavigate } from "react-router-dom";
 import { Button, Modal, Form } from "react-bootstrap";
 import { loginService } from "../../services/auth.services";
+import Dropdown from "react-bootstrap/Dropdown";
 
 import { AuthContext } from "../../context/auth.context";
 function Login() {
@@ -42,6 +43,7 @@ function Login() {
       await authenticateUser();
 
       handleCloseModal();
+      navigate("/")
     } catch (error) {
       console.log(error);
       if (error.response.status === 400) {
@@ -54,10 +56,9 @@ function Login() {
 
   return (
     <>
-      <Button variant="primary" onClick={handleOpenModal}>
-        Iniciar sesión
-      </Button>
-
+      <Dropdown.Item onClick={handleOpenModal}>
+        Iniciar Sesión
+      </Dropdown.Item>
       <Modal show={showModal} onHide={handleCloseModal}>
         <Modal.Header closeButton>
           <Modal.Title>Iniciar sesión</Modal.Title>

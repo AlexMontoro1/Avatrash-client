@@ -48,58 +48,72 @@ function Feedback( ) {
       
   return (
     <>
-        <Button variant="primary" onClick={handleOpenModal}>
-        Envíame tu Feedback
-        </Button>
+    <Button variant="primary" onClick={handleOpenModal}>
+      Envíame tu Feedback
+    </Button>
 
-        <Modal show={showModal} onHide={handleCloseModal} size="lg"
+    <Modal
+      show={showModal}
+      onHide={handleCloseModal}
+      size="lg"
       aria-labelledby="contained-modal-title-vcenter"
-      centered>
-        <Modal.Header closeButton>
-          <Modal.Title id="contained-modal-title-vcenter">Feedback</Modal.Title>
-        </Modal.Header>
-        <Modal.Body>
-          <Form>
-            <Form.Group className="mb-3" controlId="exampleForm.ControlInput1">
-              <Form.Label>Que podria mejorar</Form.Label>
-              <Form.Control
-                as="textarea" rows={3}
-                type="text"
-                placeholder="... tu texto aquí"
-                autoFocus
-                value={feedbackImprovement}
-                onChange={handleImprovementChange}
-              />
-            </Form.Group>
-            <Form.Group className="mb-3"
-              controlId="exampleForm.ControlTextarea1">
-              <Form.Label>Que te ha gustado</Form.Label>
-              <Form.Control
-                as="textarea" rows={3}
-                type="text"
-                placeholder="... tu texto aquí"
-                value={feedbackLikes}
-                onChange={handleLikesChange}
-              />
-            </Form.Group>
-            </Form>
-        </Modal.Body>
-        <Modal.Footer>
-          <Button variant="primary" onClick={handleSendFeedback}>
+      centered
+    >
+      <Modal.Header closeButton>
+        <Modal.Title id="contained-modal-title-vcenter">
+          Feedback
+        </Modal.Title>
+      </Modal.Header>
+      <Modal.Body>
+        <Form>
+          <Form.Group className="mb-3" controlId="improvementTextArea">
+            <Form.Label>Qué podría mejorar</Form.Label>
+            <Form.Control
+              as="textarea"
+              rows={3}
+              type="text"
+              placeholder="... tu texto aquí"
+              autoFocus
+              value={feedbackImprovement}
+              onChange={handleImprovementChange}
+            />
+          </Form.Group>
+          <Form.Group className="mb-3" controlId="likesTextArea">
+            <Form.Label>Qué te ha gustado</Form.Label>
+            <Form.Control
+              as="textarea"
+              rows={3}
+              type="text"
+              placeholder="... tu texto aquí"
+              value={feedbackLikes}
+              onChange={handleLikesChange}
+            />
+          </Form.Group>
+        </Form>
+      </Modal.Body>
+      <Modal.Footer>
+        <Button variant="primary" onClick={handleSendFeedback}>
           Enviar Feedback
-          </Button>
-        </Modal.Footer>
-      </Modal>
+        </Button>
+      </Modal.Footer>
+    </Modal>
 
-      {showAlert && (
-        <Alert variant="success" onClose={() => setShowAlert(false)} dismissible>
+    {showAlert && (
+      <div className="feedback-alert">
+        <Alert
+          variant="success"
+          onClose={() => setShowAlert(false)}
+          dismissible
+        >
           <Alert.Heading>¡Gracias por enviar tu Feedback!</Alert.Heading>
           <p>
-            Leo todos y cada uno de vuestros Feedbacks y me sirven muchísimo para seguir mejorando.
+            Leo todos y cada uno de vuestros Feedbacks y me sirven muchísimo
+            para seguir mejorando.
           </p>
         </Alert>
-      )}
-    </>
+      </div>
+    )}
+  </>
   )
 }
 

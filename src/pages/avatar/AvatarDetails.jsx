@@ -1,6 +1,7 @@
 import { useEffect, useState, useContext } from "react";
 import { createAvatar } from '@dicebear/core';
 import { avataaars } from '@dicebear/collection';
+import { Container, Row, Col, Button, Modal, Form, Card } from 'react-bootstrap';
 import { AuthContext } from "../../context/auth.context";
 import { useParams, useNavigate, Link } from "react-router-dom";
 import { getAvatarDetailsService, deleteAvatarService, likeAvatarService, editAvatarService  } from "../../services/avatar.services"
@@ -27,7 +28,7 @@ import {
 
 function AvatarDetails() {
 
-  const { user } = useContext(AuthContext)
+  const { user, isLoggedIn } = useContext(AuthContext)
 
   const { avatarId } = useParams()
 
@@ -38,6 +39,7 @@ function AvatarDetails() {
   const [ createComment, setCreateComment ] = useState("")
   const [ allComments, setAllComments ] = useState([])
   const [likesNumber, setLikesNumber] = useState(0);
+  const [showCommentsModal, setShowCommentsModal] = useState(false);
 
 
 
@@ -142,7 +144,13 @@ function AvatarDetails() {
       png.toFile('avatar.png');
     }
   };
+  const handleOpenCommentsModal = () => {
+    setShowCommentsModal(true);
+  };
 
+  const handleCloseCommentsModal = () => {
+    setShowCommentsModal(false);
+  };
   
 
   if (isLoading) {
@@ -156,25 +164,46 @@ function AvatarDetails() {
   const isAuthenticatedUser = avatarDetails.owner?.toString() === user?._id?.toString();
   const canEditOrDelete = isAuthenticatedUser ? (
     <div>
-      <button onClick={handleDelete}>Borrar</button>
-      <Link to={`/avatar/${avatarId}/edit`}>
-        <button>Editar</button>
-      </Link>
-    </div>
+    <button onClick={handleDelete} className="btn btn-danger" style={{marginLeft: 20}}>Borrar</button>
+    <Link to={`/avatar/${avatarId}/edit`}>
+      <button className="btn btn-primary" style={{marginLeft: 20}}>Editar</button>
+    </Link>
+  </div>
   ) : null;
 
   return (
-    <div>
-    <h3>{avatarDetails.name}</h3>
-    <img
-      src={`data:image/svg+xml;utf8,${encodeURIComponent(
-        avatarDetails.json.svg
-      )}`}
-      alt="avatar"
-      style={{ width: "300px", height: "300px" }}
-    />
-    <button onClick={handleDownload}>Descargar Avatar</button>
-    <ul>
+    <Container style={{ color: "white" , marginTop: "20px"}}>
+      <Row>
+      <Col xs={12} md={6}>
+        <Card>
+          <Card.Body>
+            <div className="text-center">
+              <h3>{avatarDetails.name}</h3>
+              <img
+                src={`data:image/svg+xml;utf8,${encodeURIComponent(
+                  avatarDetails.json.svg
+                )}`}
+                alt="avatar"
+                style={{ width: "300px", height: "300px", margin: "auto" }}
+              />
+              <button onClick={handleDownload} className="btn btn-warning mt-3">Descargar Avatar</button>
+            </div>
+            {isLoggedIn && (
+        <div>
+        <h3>Likes: {likesNumber}</h3>
+        <button onClick={handleLikes} className="btn btn-primary">
+          <span style={{color: "red"}}>❤️</span> Like
+        </button>
+      </div>
+      )}
+          </Card.Body>
+        </Card>
+      </Col>
+    <Col xs={12} md={6}>
+    <Card>
+          <Card.Body>
+            <Card.Title>Detalles del Avatar</Card.Title>
+            <ul className="list-unstyled">
       <li>
         Accesorio: {accessoryOptions[avatarDetails.accessories]} - Color:{" "}
         {accessoriesColorOptions[avatarDetails.accessoriesColor]}
@@ -222,38 +251,64 @@ function AvatarDetails() {
         Estilo del avatar: {styleOptions[avatarDetails.style]}
       </li>
     </ul>
-    <div>
-    <h3>Likes: {likesNumber}</h3>
-      <button onClick={handleLikes}>Like</button>
-      </div>
+   
     {canEditOrDelete}
-        <div>
-          {allComments.map(({author, content, _id})=> {
-            const isAuthenticatedUser = author && author._id === (user && user._id);
-            return (
-              <div key={_id}>
-                <p>Comentario de {author && author.username}</p>
-              <p>{content}</p>
-              {isAuthenticatedUser && (
-        <button onClick={() => handleSubmitDeleteComment(_id)}>
-          Borrar comentario
-        </button>
-      )}
-              </div>
-              )}
-            )
-          }
-          
-        </div>
-        <div>
-          <h3>Agregar Comentario</h3>
+    </Card.Body>
+        </Card>
+    </Col>
+    </Row>
+    <Row>
+        <Col xs={12}>
+          <h2>Comentarios</h2>
+          <Button variant="primary" onClick={handleOpenCommentsModal}>
+            Ver Comentarios
+          </Button>
+        </Col>
+      </Row>
 
+      <Modal show={showCommentsModal} onHide={handleCloseCommentsModal} size="lg">
+        <Modal.Header closeButton>
+          <Modal.Title>Comentarios</Modal.Title>
+        </Modal.Header>
+        <Modal.Body>
+          <div className="comments-container">
+            {allComments.map(({ author, content, _id }) => {
+              const isAuthenticatedUser =
+                author && author._id === (user && user._id);
+              return (
+                <div key={_id} className="comment card mb-3">
+                  <div className="card-body">
+                    <h5 className="card-title">Comentario de {author && author.username}</h5>
+                    <p className="card-text">{content}</p>
+                    {isAuthenticatedUser && (
+                      <button
+                        onClick={() => handleSubmitDeleteComment(_id)}
+                        className="btn btn-danger"
+                      >
+                        Borrar comentario
+                      </button>
+                    )}
+                  </div>
+                </div>
+              );
+            })}
+          </div>
+        </Modal.Body>
+      </Modal>
+        {isLoggedIn && (
+          <Row >
+          <Col xs={12}>
+          <h3>Agregar Comentario</h3>
+          
           <form onSubmit={handleSubmitCreateComment}>
-            <input type="text" name="comment" onChange={(e) => setCreateComment(e.target.value)} value={createComment}/>
-            <button type="submit">Agregar Comentario</button>
+            <Form.Control style={{width: "30%", marginBottom: 10}} type="text" name="comment" onChange={(e) => setCreateComment(e.target.value)} value={createComment}/>
+            <Button variant="primary" type="submit">Agregar Comentario</Button>
           </form>
-        </div>
-  </div>
+          </Col>
+        </Row>
+        )}
+        
+        </Container>
   )
 }
 

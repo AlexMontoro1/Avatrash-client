@@ -1,7 +1,8 @@
-import React, { useState } from "react";
+import { useState } from "react";
 import { useNavigate } from "react-router-dom";
 import { signinService } from "../../services/auth.services";
 import { Button, Modal, Form } from "react-bootstrap";
+import Dropdown from "react-bootstrap/Dropdown";
 
 function Signin() {
   const navigate = useNavigate();
@@ -50,9 +51,9 @@ function Signin() {
 
   return (
     <>
-      <Button variant="primary" onClick={handleOpenModal}>
+      <Dropdown.Item onClick={handleOpenModal}>
         Registrarse
-      </Button>
+      </Dropdown.Item>
 
       <Modal show={showModal} onHide={handleCloseModal}>
         <Modal.Header closeButton>
