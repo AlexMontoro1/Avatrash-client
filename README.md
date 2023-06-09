@@ -6,17 +6,33 @@
 
 ## Description
 
-**NOTE -** Describe your project in one/two lines.
-#### [Client Repo here](www.your-github-url-here.com)
-#### [Server Repo here](www.your-github-url-here.com)
+This project in general is an interactive website between users who can create their own avatars and see the ones that others have created, be able to comment on them and like them.
+
+#### [Client Repo here](https://github.com/AlexMontoro1/Avatrash-client)
+#### [Server Repo here](https://github.com/AlexMontoro1/Avatrash-server)
 
 ## Backlog Functionalities
 
-**NOTE -** List here all functionalities you wish to add to your proyect later or you are currently working on
+-Email verification 
+-Live chat
+-Random avatar generation
+-Avatar war (compete against another person and see who gets the most likes) 
+-Implement new accessories and new avatar models
 
 ## Technologies used
 
-**NOTE -** List here all technologies used in the project like HTML, CSS, Javascript, React, axios, React Context etc.
+-HTML
+-CSS
+-Javascript
+-React
+-axios
+-React Context
+-Cloudinary
+-Bootstrap
+-MongoDB
+-MongoAtlas
+-Netlify
+-GitHub
 
 # Client Structure
 
@@ -24,14 +40,17 @@
 
 **NOTE -**  List here all the actions a user can do in the app. Example:
 
-- **404** - As a user I want to see a nice 404 page when I go to a page that doesn’t exist so that I know it was my fault 
-- **500** - As a user I want to see a nice error page when the super team screws it up so that I know that is not my fault
-- **homepage** - As a user I want to be able to access the homepage so that I see what the app is about and login and signup
-- **sign up** - As a user I want to sign up on the webpage so that I can see all the events that I could attend
-- **login** - As a user I want to be able to log in on the webpage so that I can get back to my account
-- **logout** - As a user I want to be able to log out from the webpage so that I can make sure no one will access my account
-- **events list** - As a user I want to see all the events available so that I can choose which ones I want to attend
-- **events create** - As a user I want to create an event so that I can invite others to attend
+- **homepage** - I can click on create avatar , go to catalog, signin and login.
+- **sign in** - As a user you can register without problems using a user email and password.
+- **login** - As a user you can login to the page with your email and password and thus be able to access new features.
+- **logout** - As a user you can log out and exit your account to be able to re-enter or navigate without being logged in.
+- **avatar create** - By clicking on the create home button or on the create avatar dropdown menu, you can create a custom avatar that will be saved to your profile and displayed in the avatar catalog.
+- **catalog** - As a logged or unlogged user you can see the catalog of avatars created by the community, search by name or filter by popularity (number of likes).
+- **avatar details** - As a user without login you can see the image of the avatar and its characteristics, even download a png image of the avatar in question, but if you are logged in you can even put comments and like the avatars, if you are the creator of the avatar, you can edit it or delete it.
+- **profile** - As a logged in user, you can see your profile, modify it and see all the avatars you have created in a drop-down mode where you can click on the one you want to see its details.
+- **navbar** - From the navbar it depends on whether you are logged in or not because you can go to the catalog, to create an avatar, to your profile, to registration, to login, to your profile, to disconnect, and even if you are an admin see your administrator page.
+- **footer** - Here as a user you can see a footer with developer contact information, and you can even send feedback.
+- **admin** - Here only as an administrator, you can see the feedback that users have sent about the page.
 
 ## Client Routes
 
@@ -41,12 +60,13 @@
 | Path                      | Page            | Components        | Permissions              | Behavior                                                      |
 | ------------------------- | ----------------| ----------------  | ------------------------ | ------------------------------------------------------------  |
 | `/`                       | Home            |                   | public                   | Home page                                                     |
-| `/signup`                 | Signup          |                   | anon only `<IsAnon>`     | Signup form, link to login, navigate to homepage after signup |
-| `/login`                  | Login           |                   | anon only `<IsAnon>`     | Login form, link to signup, navigate to homepage after login  |
+| `/signup`                 | Signup          |                   | anon only `<IsAnon>`     | Signup form modal, navigate to homepage after signup          |
+| `/login`                  | Login           |                   | anon only `<IsAnon>`     | Login form modal,navigate to homepage after login             |
 | `/profile`                | Profile         | EditProfile       | user only `<IsPrivate>`  | Navigate to homepage after logout, expire session             |
-| `/games/list`             | GameList        | AddGame, GameCard | user only `<IsPrivate>`  | Shows all films on backlog                                    |
-| `/games/edit`             | GamesEdit       |                   | user only `<IsPrivate>`  | Shows all games on backlog                                    |
-| `/games/favourites`       | FavouriteList   | GameCard          | user only `<IsPrivate>`  | Shows all games on backlog                                    |
+| `/avatar/create`          | AvatarCreate    | Create avatar     | user only `<IsPrivate>`  | form to create an avatar                                      |
+| `/avatar/details`         | GamesEdit       | Comments,edit     | user only `<IsPrivate>`  | Shows avatar details and actions                              |
+                                                ,delete,download
+| `/catalog`                | Catalog         |                   | public                   | Shows all avatars on catalog                                  |
 
 ## Other Components
 
@@ -59,43 +79,42 @@
   - auth.login(user)
   - auth.signup(user)
   - auth.verify()
-
-- Backlog Service
-  - game.filter(type, status)
-  - game.detail(id)
-  - game.add(id)
-  - game.delete(id)
-  - game.update(id)
+- Avatar Service
+  -  avatar()
+  -  avatar.crate(new)
+  -  avatar.details(id)
+  -  avatar.edit(id, edited)
+  -  avatar.delete(id)
+  -  avatar.like(id)
+- Comment Service
+  -  comment.create(id,new)
+  -  comment.delete(id,id)
+- Feedback Service
+  -  feedback.create(new)
+  -  feedback()
+-  Profile Service
+  -  profile(user)
+  -  profile.edit(user,edited)
+  -  upload(imgData)
   
-- External API
-  - gameApi.details
-  - gameApi.list
+- External Library
+  -  avataaars
   
 ## Context
 
 - auth.context
-- theme.context
   
 ## Links
 
 ### Collaborators
 
-[Developer 1 name](www.github-url.com)
-
-[Developer 2 name](www.github-url.com)
+[Alex Montoro](https://github.com/AlexMontoro1)
 
 ### Project
 
-[Repository Link Client](www.your-github-url-here.com)
+[Repository Link Client](https://github.com/AlexMontoro1/Avatrash-client)
 
-[Repository Link Server](www.your-github-url-here.com)
+[Repository Link Server](https://github.com/AlexMontoro1/Avatrash-server)
 
-[Deploy Link](www.your-deploy-url-here.com)
+[Deploy Link](https://avatrash.netlify.app/)
 
-### Trello
-
-[Link to your trello board](www.your-trello-url-here.com)
-
-### Slides
-
-[Slides Link](www.your-slides-url-here.com)
