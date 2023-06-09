@@ -1,8 +1,6 @@
 import  { useState } from "react";
-import { useNavigate } from "react-router-dom";
 import { Button, Modal, Form, Alert } from "react-bootstrap";
 import { createFeedbackService } from "../services/feedback.services"
-import { Orbit } from '@uiball/loaders'
 
 function Feedback( ) {
 
@@ -67,7 +65,7 @@ function Feedback( ) {
       <Modal.Body>
         <Form>
           <Form.Group className="mb-3" controlId="improvementTextArea">
-            <Form.Label>Qué podría mejorar</Form.Label>
+            <Form.Label style={{color: "black"}}>Qué podría mejorar</Form.Label>
             <Form.Control
               as="textarea"
               rows={3}
@@ -79,7 +77,7 @@ function Feedback( ) {
             />
           </Form.Group>
           <Form.Group className="mb-3" controlId="likesTextArea">
-            <Form.Label>Qué te ha gustado</Form.Label>
+            <Form.Label style={{color: "black"}}>Qué te ha gustado</Form.Label>
             <Form.Control
               as="textarea"
               rows={3}
