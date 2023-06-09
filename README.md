@@ -2,7 +2,7 @@
 
 ## [See the App!](https://avatrash.netlify.app/)
 
-![App Logo](your-image-logo-path-or-name)
+![App Logo](https://imgur.com/iRU2Huc)
 
 ## Description
 
